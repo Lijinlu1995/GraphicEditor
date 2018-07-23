@@ -1,0 +1,131 @@
+#pencilTool {
+  -fx-background-image: url('file:icons/pencil24-px.png');
+  -fx-background-position: center;
+  -fx-background-repeat: stretch;
+}
+
+#brushTool {
+  -fx-background-image: url('file:icons/artistic-brush24-px.png');
+  -fx-background-position: center;
+  -fx-background-repeat: stretch;
+  
+}
+
+#eraseTool {
+  -fx-background-image: url('file:icons/rubber24-px.png');
+  -fx-background-position: center;
+  -fx-background-repeat: stretch;
+  
+}
+
+#selectionTool {
+  -fx-background-image: url('file:icons/cursor16-px.png');
+  -fx-background-position: center;
+  -fx-background-repeat: stretch;
+ 
+}
+
+#cutTool {
+  -fx-background-image: url('file:icons/scissors.png');
+  -fx-background-position: center;
+  -fx-background-repeat: stretch;
+}
+
+#fillTool {
+  -fx-background-image: url('file:icons/paint-bucket.png');
+  -fx-background-position: center;
+  -fx-background-repeat: stretch;
+}
+
+#undoTool {
+  -fx-background-image: url('file:icons/undo.png');
+  -fx-background-position: center;
+  -fx-background-repeat: stretch;
+}
+
+#redoTool {
+  -fx-background-image: url('file:icons/redo.png');
+  -fx-background-position: center;
+  -fx-background-repeat: stretch;
+}
+
+#lineIcon {
+  -fx-background-image : url('file:icons/diagonal-line.png');
+  -fx-background-position: center;
+  -fx-background-repeat: stretch;
+}
+
+#circleIcon {
+  -fx-background-image:  url('file:icons/circle.png');
+  -fx-background-position: center;
+  -fx-background-repeat: stretch;
+  }
+
+#ellipseIcon {
+  -fx-background-image:  url('file:icons/ellipse.png');
+  -fx-background-position: center;
+  -fx-background-repeat: stretch;
+}
+
+#triangleIcon {
+  -fx-background-image:  url('file:icons/triangle.png');
+  -fx-background-position: center;
+  -fx-background-repeat: stretch;
+}
+
+#squareIcon {	
+  -fx-background-image:  url('file:icons/square.png');
+  -fx-background-position: center;
+  -fx-background-repeat: stretch;
+}
+
+#rectangleIcon {
+  -fx-background-image:  url('file:icons/rectangle.png');
+  -fx-background-position: center;
+  -fx-background-repeat: stretch;
+}
+
+#roundRectangleIcon {
+  -fx-background-image:  url('file:icons/roundrect.png');
+  -fx-background-position: center;
+  -fx-background-repeat: stretch;
+}
+#deleteShapes {
+  -fx-background-image:  url('file:icons/rubbish-bin.png');
+  -fx-background-position: center;
+  -fx-background-repeat: stretch;
+}
+
+#dragShapes {
+  -fx-background-image:  url('file:icons/move.png');
+  -fx-background-position: center;
+  -fx-background-repeat: stretch;
+}
+
+#resizeShapes {
+  -fx-background-image:  url('file:icons/resize.png');
+  -fx-background-position: center;
+  -fx-background-repeat: stretch;
+}
+
+#newCanvasDone {
+  -fx-background-image:  url('file:icons/check-mark.png');
+  -fx-background-position: center;
+  -fx-background-repeat: stretch;
+}
+
+#pane {
+	-fx-background-color: white;
+	-fx-border-width: 0.0 1.0 1.0 0.0;
+	-fx-border-color: gray;
+	-fx-padding: 0.0 10.0 10.0 0.0
+}
+
+#mainPane {
+	-fx-background-color: transparent ;
+}
+
+#anchorPane {
+	-fx-background-color: transparent ;
+}
+

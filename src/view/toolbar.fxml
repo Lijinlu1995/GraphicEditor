@@ -13,7 +13,7 @@
 	<children>
 		<ToolBar prefHeight="40.0" prefWidth="200.0"
 			AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0"
-			AnchorPane.topAnchor="0.0">
+			AnchorPane.topAnchor="0.0" >
 			<items>
 				<Button id="pencilTool" maxHeight="33.0" maxWidth="40.0"
 					minHeight="33.0" minWidth="40.0" mnemonicParsing="false"
@@ -49,39 +49,44 @@
 				<Button id="deleteShapes" layoutX="325.0" layoutY="14.0" maxHeight="33.0"
 					maxWidth="40.0" minHeight="33.0" minWidth="40.0" mnemonicParsing="false"
 					prefHeight="33.0" prefWidth="40.0" onMouseClicked="#deletingTool"/>
-				<Button id="lineIcon" layoutX="235.0" layoutY="14.0"
-					maxHeight="33.0" maxWidth="40.0" minHeight="33.0" minWidth="40.0"
-					mnemonicParsing="false" onMouseClicked="#drawLine" prefHeight="33.0"
-					prefWidth="40.0" />
-				<Button id="rectangleIcon" layoutX="235.0" layoutY="14.0"
-					maxHeight="33.0" maxWidth="40.0" minHeight="33.0" minWidth="40.0"
-					mnemonicParsing="false" onMouseClicked="#drawRectangle" prefHeight="33.0"
-					prefWidth="40.0" />
-				<Button id="squareIcon" layoutX="235.0" layoutY="14.0"
-					maxHeight="33.0" maxWidth="40.0" minHeight="33.0" minWidth="40.0"
-					mnemonicParsing="false" onMouseClicked="#drawSquare" prefHeight="33.0"
-					prefWidth="40.0" />
-				<Button id="triangleIcon" layoutX="235.0" layoutY="14.0"
-					maxHeight="33.0" maxWidth="40.0" minHeight="33.0" minWidth="40.0"
-					mnemonicParsing="false" prefHeight="33.0" prefWidth="40.0"
-					onMouseClicked="#drawTriangle" />
-				<Button id="ellipseIcon" layoutX="235.0" layoutY="14.0"
-					maxHeight="33.0" maxWidth="40.0" minHeight="33.0" minWidth="40.0"
-					mnemonicParsing="false" onMouseClicked="#drawEllipse" prefHeight="33.0"
-					prefWidth="40.0" />
-				<Button id="circleIcon" layoutX="235.0" layoutY="14.0"
-					maxHeight="33.0" maxWidth="40.0" minHeight="33.0" minWidth="40.0"
-					mnemonicParsing="false" onMouseClicked="#drawCircle" prefHeight="33.0"
-					prefWidth="40.0" />
-                <Button id="roundRectangleIcon" layoutX="235.0" layoutY="14.0"
-                        maxHeight="33.0" maxWidth="40.0" minHeight="33.0" minWidth="40.0"
-                        mnemonicParsing="false" onMouseClicked="#drawRectangle" prefHeight="33.0"
-                        prefWidth="40.0" />
                 <ColorPicker fx:id="colorPicker" />
                 <Slider fx:id="slider" blockIncrement="5.0"
                         majorTickUnit="5.0" max="30.0" min="5.0" minorTickCount="5"
                         showTickLabels="true" />
 			</items>
 		</ToolBar>
+        <ToolBar orientation="VERTICAL" prefHeight="621.0" prefWidth="50.0" AnchorPane.leftAnchor="0.0"
+                 AnchorPane.topAnchor="43.0">
+            <items>
+                <Button id="lineIcon" layoutX="235.0" layoutY="14.0"
+                        maxHeight="33.0" maxWidth="40.0" minHeight="33.0" minWidth="40.0"
+                        mnemonicParsing="false" onMouseClicked="#drawLine" prefHeight="33.0"
+                        prefWidth="40.0" />
+                <Button id="rectangleIcon" layoutX="235.0" layoutY="14.0"
+                        maxHeight="33.0" maxWidth="40.0" minHeight="33.0" minWidth="40.0"
+                        mnemonicParsing="false" onMouseClicked="#drawRectangle" prefHeight="33.0"
+                        prefWidth="40.0" />
+                <Button id="squareIcon" layoutX="235.0" layoutY="14.0"
+                        maxHeight="33.0" maxWidth="40.0" minHeight="33.0" minWidth="40.0"
+                        mnemonicParsing="false" onMouseClicked="#drawSquare" prefHeight="33.0"
+                        prefWidth="40.0" />
+                <Button id="triangleIcon" layoutX="235.0" layoutY="14.0"
+                        maxHeight="33.0" maxWidth="40.0" minHeight="33.0" minWidth="40.0"
+                        mnemonicParsing="false" prefHeight="33.0" prefWidth="40.0"
+                        onMouseClicked="#drawTriangle" />
+                <Button id="ellipseIcon" layoutX="235.0" layoutY="14.0"
+                        maxHeight="33.0" maxWidth="40.0" minHeight="33.0" minWidth="40.0"
+                        mnemonicParsing="false" onMouseClicked="#drawEllipse" prefHeight="33.0"
+                        prefWidth="40.0" />
+                <Button id="circleIcon" layoutX="235.0" layoutY="14.0"
+                        maxHeight="33.0" maxWidth="40.0" minHeight="33.0" minWidth="40.0"
+                        mnemonicParsing="false" onMouseClicked="#drawCircle" prefHeight="33.0"
+                        prefWidth="40.0" />
+                <Button id="roundRectangleIcon" layoutX="235.0" layoutY="14.0"
+                        maxHeight="33.0" maxWidth="40.0" minHeight="33.0" minWidth="40.0"
+                        mnemonicParsing="false" onMouseClicked="#drawRectangle" prefHeight="33.0"
+                        prefWidth="40.0" />
+            </items>
+        </ToolBar>
 	</children>
 </AnchorPane>
