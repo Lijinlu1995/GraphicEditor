@@ -105,7 +105,7 @@ public class SquareShape extends RectangleShape {
 
     @Override
     public void resizeShape(Node node, Pane pane) {
-        resetMouseEvents(pane);
+        //resetMouseEvents(pane);
         finalRectangle = (Rectangle) node;
         initialX = finalRectangle.getX();
         initialY = finalRectangle.getY();

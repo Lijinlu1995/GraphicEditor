@@ -46,7 +46,7 @@ public abstract class Shapes {
        @param node The shape which is required to be moved/dragged.
        @param pane The pane which contains the shape.*/
     public void moveShape(Node node, Pane pane) {
-        resetMouseEvents(pane);
+        //resetMouseEvents(pane);
         EventHandler<MouseEvent> mouseHandler = mouseEvent -> {
             if (mouseEvent.getEventType() == MouseEvent.MOUSE_PRESSED) {
                 node.setCursor(Cursor.MOVE);
@@ -72,7 +72,7 @@ public abstract class Shapes {
        @param color The color which is required to fill the shape with.
        @param node The shape which is required to be filled with a certain color.*/
     public void fillShape(Pane pane, Color color, Node node) {
-        resetMouseEvents(pane);
+        //resetMouseEvents(pane);
         EventHandler<MouseEvent> mouseHandler = mouseEvent -> {
         if (mouseEvent.getEventType() == MouseEvent.MOUSE_PRESSED) {
             if (node instanceof Polygon) {
@@ -96,7 +96,7 @@ public abstract class Shapes {
        @param pane The pane which contains the shape.
        @param node The shape which is required to be deleted.*/
     public void deleteShape(Pane pane, Node node) {
-        resetMouseEvents(pane);
+        //resetMouseEvents(pane);
         if (node instanceof Line || node instanceof Polygon || node instanceof Rectangle
             || node instanceof Ellipse) {
             EventHandler<MouseEvent> mouseHandler = mouseEvent -> {
@@ -147,7 +147,7 @@ public abstract class Shapes {
 
     /* Resets the mouse events on a pane.
        @param pane The pane whose mouse events are required to be reset.*/
-    void resetMouseEvents(Pane pane) {
+  /*  void resetMouseEvents(Pane pane) {
         EventHandler<MouseEvent> mouseHandler = mouseEvent -> {
         if (mouseEvent.getEventType() == MouseEvent.MOUSE_PRESSED) {
             // Do Nothing...
@@ -160,7 +160,7 @@ public abstract class Shapes {
         pane.setOnMouseDragged(mouseHandler);
         pane.setOnMouseReleased(mouseHandler);
     }
-
+*/
     /*
      * Configures the cursor on the shape corresponding to the current operation.
      * @param initialX  A double value represents the horizontal-x coordinate of the shape.

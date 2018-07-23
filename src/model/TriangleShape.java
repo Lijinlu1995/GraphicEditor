@@ -97,7 +97,7 @@ public class TriangleShape extends PolygonShape {
 
     @Override
     public void resizeShape(Node node, Pane pane) {
-        resetMouseEvents(pane);
+        //resetMouseEvents(pane);
         polygon = (Polygon) node;
         ObservableList<Double> points;
         points = polygon.getPoints();

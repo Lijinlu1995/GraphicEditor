@@ -72,7 +72,7 @@ public class LineSegment extends Shapes {
 
     @Override
     public void resizeShape(Node node, Pane pane) {
-        resetMouseEvents(pane);
+        //resetMouseEvents(pane);
         line = (Line) node;
         initialX = line.getStartX();
         initialY = line.getStartY();

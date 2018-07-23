@@ -87,7 +87,7 @@ public class CircleShape extends EllipseShape {
 
     @Override
     public void resizeShape(Node node, Pane pane) {
-        resetMouseEvents(pane);
+        //resetMouseEvents(pane);
         ellipse = (Ellipse) node;
         initialX = ellipse.getCenterX() - ellipse.getRadiusX();
         initialY = ellipse.getCenterY() - ellipse.getRadiusY();
