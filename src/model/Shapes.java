@@ -147,7 +147,7 @@ public abstract class Shapes {
 
     /* Resets the mouse events on a pane.
        @param pane The pane whose mouse events are required to be reset.*/
-  /*  void resetMouseEvents(Pane pane) {
+    void resetMouseEvents(Pane pane) {
         EventHandler<MouseEvent> mouseHandler = mouseEvent -> {
         if (mouseEvent.getEventType() == MouseEvent.MOUSE_PRESSED) {
             // Do Nothing...
@@ -160,7 +160,6 @@ public abstract class Shapes {
         pane.setOnMouseDragged(mouseHandler);
         pane.setOnMouseReleased(mouseHandler);
     }
-*/
     /*
      * Configures the cursor on the shape corresponding to the current operation.
      * @param initialX  A double value represents the horizontal-x coordinate of the shape.

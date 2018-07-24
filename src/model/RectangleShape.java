@@ -111,7 +111,7 @@ public class RectangleShape extends PolygonShape {
 
     @Override
     public void resizeShape(Node node, Pane pane) {
-        //resetMouseEvents(pane);
+        resetMouseEvents(pane);
         rectangle = (Rectangle) node;
         initialX = rectangle.getX();
         initialY = rectangle.getY();

@@ -4,10 +4,11 @@ public class enums {
 
     /* Enum which represents the current operation of the application.*/
     public enum State {
-        PENCIL_SKETCHING(1),
-        BRUSH_SKETCHING(2),
-        ERASE_SKETCHING(3),
-        RECTANGLE_DRAW(4),
+        PENCIL_SKETCHING(0),
+        BRUSH_SKETCHING(1),
+        ERASE_SKETCHING(2),
+        RECTANGLE_DRAW(3),
+        ROUNDRECTANGLE_DRAW(4),
         SQUARE_DRAW(5),
         ELLIPSE_DRAW(6),
         CIRCLE_DRAW(7),

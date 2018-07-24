@@ -25,6 +25,12 @@
  
 }
 
+#textTool {
+  -fx-background-image: url('file:icons/text.png');
+  -fx-background-position: center;
+  -fx-background-repeat: stretch;
+}
+
 #cutTool {
   -fx-background-image: url('file:icons/scissors.png');
   -fx-background-position: center;
@@ -104,6 +110,12 @@
 
 #resizeShapes {
   -fx-background-image:  url('file:icons/resize.png');
+  -fx-background-position: center;
+  -fx-background-repeat: stretch;
+}
+
+#newCanvasDone {
+  -fx-background-image:  url('file:icons/check-mark.png');
   -fx-background-position: center;
   -fx-background-repeat: stretch;
 }

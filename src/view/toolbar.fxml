@@ -49,10 +49,17 @@
 				<Button id="deleteShapes" layoutX="325.0" layoutY="14.0" maxHeight="33.0"
 					maxWidth="40.0" minHeight="33.0" minWidth="40.0" mnemonicParsing="false"
 					prefHeight="33.0" prefWidth="40.0" onMouseClicked="#deletingTool"/>
+				<Button id="textTool" layoutX="325.0" layoutY="14.0" maxHeight="33.0"
+						maxWidth="40.0" minHeight="33.0" minWidth="40.0" mnemonicParsing="false"
+						prefHeight="33.0" prefWidth="40.0" onMouseClicked="#deletingTool"/>
                 <ColorPicker fx:id="colorPicker" />
                 <Slider fx:id="slider" blockIncrement="5.0"
-                        majorTickUnit="5.0" max="30.0" min="5.0" minorTickCount="5"
+                        majorTickUnit="5.0" max="30.0" min="2.0" minorTickCount="4"
                         showTickLabels="true" />
+				<Button id="rectangleIcon" layoutX="235.0" layoutY="14.0"
+						maxHeight="33.0" maxWidth="40.0" minHeight="33.0" minWidth="40.0"
+						mnemonicParsing="false" onMouseClicked="#drawRectangle" prefHeight="33.0"
+						prefWidth="40.0" />
 			</items>
 		</ToolBar>
         <ToolBar orientation="VERTICAL" prefHeight="621.0" prefWidth="50.0" AnchorPane.leftAnchor="0.0"
@@ -84,7 +91,7 @@
                         prefWidth="40.0" />
                 <Button id="roundRectangleIcon" layoutX="235.0" layoutY="14.0"
                         maxHeight="33.0" maxWidth="40.0" minHeight="33.0" minWidth="40.0"
-                        mnemonicParsing="false" onMouseClicked="#drawRectangle" prefHeight="33.0"
+                        mnemonicParsing="false" onMouseClicked="#drawRoundRectangle" prefHeight="33.0"
                         prefWidth="40.0" />
             </items>
         </ToolBar>

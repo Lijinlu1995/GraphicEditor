@@ -75,9 +75,9 @@ public class ToolBarController {
    /*Draw a roundRectangle.*/
    @FXML
    private void drawRoundRectangle() {
-       RectangleShape rectangle = new RectangleShape(this.operationHistory);
-       mainController.setState(RECTANGLE_DRAW);
-       configureShape(rectangle);
+       RoundRectangleShape roundRectangle = new RoundRectangleShape(this.operationHistory);
+       mainController.setState(ROUNDRECTANGLE_DRAW);
+       configureShape(roundRectangle);
    }
     /* Draws a square.*/
     @FXML
