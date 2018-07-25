@@ -99,7 +99,7 @@ public class MenuBarController {
     /* Saves the drawing to XML or JSON files according to the user choice.
        @throws IOException An exception thrown if an error occurred while saving the drawing.*/
     @FXML
-    private void saveFile() throws IOException {
+    public void saveFile() throws IOException {
         FileChooser fileChooser = new FileChooser();
         FileChooser.ExtensionFilter pngExtensionFilter = new FileChooser.ExtensionFilter(
                 "PNG files (*.png)", "*.png");

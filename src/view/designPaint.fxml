@@ -15,6 +15,7 @@
                     AnchorPane.topAnchor="0.0"/>
         <fx:include fx:id="toolBar" source="/view/toolbar.fxml" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0"
                     AnchorPane.topAnchor="32.0"/>
+        <fx:include fx:id="layerBar" source="/view/layer.fxml" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="32.0"/>
         <ScrollPane fx:id="scrollPane" layoutX="250.0" layoutY="79.0" prefHeight="622.0" prefWidth="900.0"
                     AnchorPane.bottomAnchor="-1.0" AnchorPane.leftAnchor="55.0" AnchorPane.rightAnchor="0.0"
                     AnchorPane.topAnchor="79.0">
