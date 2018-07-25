@@ -41,7 +41,7 @@
 										</MenuItem>
 									</items>
 								</Menu>
-								<Menu mnemonicParsing="false" text="Triangle">
+								<Menu mnemonicParsing="false" text="Circle">
 
 								</Menu>
 							</items>

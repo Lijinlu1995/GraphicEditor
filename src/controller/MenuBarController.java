@@ -4,10 +4,15 @@ import com.thoughtworks.xstream.XStream;
 import com.thoughtworks.xstream.io.json.JettisonMappedXmlDriver;
 import com.thoughtworks.xstream.io.xml.StaxDriver;
 import javafx.application.Platform;
+import javafx.embed.swing.SwingFXUtils;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
+import javafx.scene.SnapshotParameters;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+import javafx.scene.image.WritableImage;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Ellipse;
@@ -16,10 +21,10 @@ import javafx.scene.shape.Polygon;
 import javafx.scene.shape.Rectangle;
 import javafx.stage.FileChooser;
 import model.PaneData;
-import java.io.File;
-import java.io.FileOutputStream;
-import java.io.FileReader;
-import java.io.IOException;
+
+import javax.imageio.ImageIO;
+import javax.swing.*;
+import java.io.*;
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
@@ -68,7 +73,7 @@ public class MenuBarController {
     }
 
     @FXML
-    private void newTriangleCanvas() {
+    private void newCircleCanvas() {
         double paneWidth = Double.parseDouble(canvasWidth.getText());
         double paneHeight = Double.parseDouble(canvasHeight.getText());
         if (paneHeight > MainController.MAX_HEIGHT
@@ -96,24 +101,49 @@ public class MenuBarController {
     @FXML
     private void saveFile() throws IOException {
         FileChooser fileChooser = new FileChooser();
+        FileChooser.ExtensionFilter pngExtensionFilter = new FileChooser.ExtensionFilter(
+                "PNG files (*.png)", "*.png");
         FileChooser.ExtensionFilter xmlExtensionFilter = new FileChooser.ExtensionFilter(
                 "XML files (*.xml)", "*.xml");
         FileChooser.ExtensionFilter jsonExtensionFilter = new FileChooser.ExtensionFilter(
                 "JSON files (*.json)", "*.json");
-        fileChooser.getExtensionFilters().addAll(xmlExtensionFilter, jsonExtensionFilter);
+        fileChooser.getExtensionFilters().addAll(pngExtensionFilter, xmlExtensionFilter, jsonExtensionFilter);
         File file = fileChooser.showSaveDialog(null);
         if (file != null) {
             String filePath = file.getPath();
             pane = mainController.getPane();
             canvas = mainController.getCanvas();
-            if (filePath.endsWith(".xml")) {
+            if (filePath.endsWith(".png")) {
+                savePNGFile(file);
+            } else if(filePath.endsWith(".xml")){
                 saveXMLFile(file);
-            } else {
+            }else{
                 saveJSONFile(file);
             }
         }
     }
 
+
+    private void savePNGFile(File file) throws IOException {
+        String extension = "";
+        String name = file.getName();
+        if (name.contains(".")) {
+            int start = name.lastIndexOf(".");
+            extension = file.getName().substring(start + 1);
+
+        } else {
+            extension = "jpg";
+        }
+        WritableImage image = pane.snapshot(new SnapshotParameters(), null);
+        try {
+            ImageIO.write(SwingFXUtils.fromFXImage(image, null), "png", file);
+            JOptionPane.showMessageDialog(null, "Save Success",
+                    "Success", JOptionPane.NO_OPTION);
+        } catch (IOException ex) {
+            JOptionPane.showMessageDialog(null, "Save Error",
+                    "Error", JOptionPane.ERROR_MESSAGE);
+        }
+    }
     /* Saves the drawing to XML file.
        @param file The file which contains the path of the file.
        @throws IOException An exception thrown if an error occurred while serializing the data of the object.*/
@@ -124,6 +154,15 @@ public class MenuBarController {
         FileOutputStream fileOutputStream = new FileOutputStream(file);
         xStream.toXML(paneData, fileOutputStream);
         fileOutputStream.close();
+        WritableImage image = pane.snapshot(new SnapshotParameters(), null);
+        try {
+            ImageIO.write(SwingFXUtils.fromFXImage(image, null), "xml", file);
+            JOptionPane.showMessageDialog(null, "Save Success",
+                    "Success", JOptionPane.NO_OPTION);
+        } catch (IOException ex) {
+            JOptionPane.showMessageDialog(null, "Save Error",
+                    "Error", JOptionPane.ERROR_MESSAGE);
+        }
     }
 
     /* Saves the drawing to JSON file.
@@ -136,6 +175,15 @@ public class MenuBarController {
         FileOutputStream fileOutputStream = new FileOutputStream(file);
         xStream.toXML(paneData, fileOutputStream);
         fileOutputStream.close();
+        WritableImage image = pane.snapshot(new SnapshotParameters(), null);
+        try {
+            ImageIO.write(SwingFXUtils.fromFXImage(image, null), "json", file);
+            JOptionPane.showMessageDialog(null, "Save Success",
+                    "Success", JOptionPane.NO_OPTION);
+        } catch (IOException ex) {
+            JOptionPane.showMessageDialog(null, "Save Error",
+                    "Error", JOptionPane.ERROR_MESSAGE);
+        }
     }
 
     /* Loads the drawing from XML or JSON files according to the user choice.
@@ -150,12 +198,30 @@ public class MenuBarController {
             String filePath = file.getPath();
             if (filePath.endsWith(".xml")) {
                 loadXMLFile(file);
+            } else if(filePath.endsWith(".png")){
+                loadPNGFile(file);
             } else {
                 loadJSONFile(file);
             }
         }
     }
 
+    private void loadPNGFile(File file) throws IOException {
+        FileChooser fileChooser = new FileChooser();
+        FileChooser.ExtensionFilter extFilter =
+                new FileChooser.ExtensionFilter("PNG files (*.png)", "*.png");
+        fileChooser.getExtensionFilters().add(extFilter);
+        if (file != null) {
+            try {
+                Image image = new Image(new FileInputStream(file));
+                ImageView iv = new ImageView();
+                iv.setImage(image);
+                pane.getChildren().add(iv);
+            } catch (Exception ex) {
+                System.out.println(ex.getMessage());
+            }
+        }
+    }
     /* Loads the drawing from XML file.
        @param file The file which contains the path of the file.
        @throws IOException An exception thrown if an error occurred while de-serializing the data of the object.*/
