@@ -1,4 +1,4 @@
-package model;
+package model.shapes;
 
 public class enums {
 

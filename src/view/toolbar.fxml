@@ -73,6 +73,11 @@
                         prefHeight="33.0" prefWidth="40.0" onMouseClicked="#deletingTool">
                     <tooltip><Tooltip text="Text Tool" /></tooltip>
                 </Button>
+                <Button id="eyedropperTool" layoutX="325.0" layoutY="14.0" maxHeight="33.0"
+                        maxWidth="40.0" minHeight="33.0" minWidth="40.0" mnemonicParsing="false"
+                        prefHeight="33.0" prefWidth="40.0" onMouseClicked="#eraserTool">
+                    <tooltip><Tooltip text="Eyedropper Tool" /></tooltip>
+                </Button>
                 <ColorPicker fx:id="colorPicker"><tooltip><Tooltip text="Swatch Tool" /></tooltip></ColorPicker>
                 <Slider fx:id="slider" blockIncrement="5.0"
                         majorTickUnit="5.0" max="30.0" min="2.0" minorTickCount="4"

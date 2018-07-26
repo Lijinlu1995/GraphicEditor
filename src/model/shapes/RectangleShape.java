@@ -1,4 +1,4 @@
-package model;
+package model.shapes;
 
 import javafx.beans.property.SimpleDoubleProperty;
 import javafx.event.EventHandler;
@@ -10,10 +10,10 @@ import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 
-/* This class represents the square shape class.*/
-public class SquareShape extends RectangleShape {
+/* This class represents the rectangle shape class.*/
+public class RectangleShape extends PolygonShape {
 
-    private Rectangle finalRectangle;
+    private Rectangle rectangle;
     private double initialX;
     private double initialY;
     private double initialW;
@@ -21,14 +21,16 @@ public class SquareShape extends RectangleShape {
     private double stateX;
     private double stateY;
 
-    public SquareShape(OperationHistory operationHistory) {
+    public RectangleShape(OperationHistory operationHistory) {
         super(operationHistory);
     }
 
     @Override
     public void drawShape(Pane pane, ColorPicker colorPicker, Slider lineWidth) {
         SimpleDoubleProperty rectangleInitialX = new SimpleDoubleProperty();
+        SimpleDoubleProperty rectangleInitialY = new SimpleDoubleProperty();
         SimpleDoubleProperty rectangleX = new SimpleDoubleProperty();
+        SimpleDoubleProperty rectangleY = new SimpleDoubleProperty();
         Rectangle initialRectangle = getNewRectangle();
         EventHandler<MouseEvent> mouseHandler = new EventHandler<MouseEvent>() {
             double initialX, x, dx, initialY, y, dy;
@@ -36,7 +38,7 @@ public class SquareShape extends RectangleShape {
             public void handle(MouseEvent mouseEvent) {
                 if (mouseEvent.getEventType() == MouseEvent.MOUSE_PRESSED) {
                     initialRectangle.widthProperty().bind(rectangleX.subtract(rectangleInitialX));
-                    initialRectangle.heightProperty().bind(rectangleX.subtract(rectangleInitialX));
+                    initialRectangle.heightProperty().bind(rectangleY.subtract(rectangleInitialY));
                     pane.getChildren().add(initialRectangle);
                     initialRectangle.setStroke(colorPicker.getValue());
                     initialRectangle.setStrokeWidth(lineWidth.getValue());
@@ -49,33 +51,36 @@ public class SquareShape extends RectangleShape {
                     dx = x - initialX;
                     y = mouseEvent.getY();
                     dy = y - initialY;
-                    if (dx < 0 && dy < 0) {  // 2nd quad case
+                    if (dx < 0 && dy < 0) {  // 2nd quadrant case
                         initialRectangle.setX(mouseEvent.getX());
                         initialRectangle.setY(mouseEvent.getY());
-                        if (-1.0 * dx > -1.0 * dy) {
-                            initialRectangle.setY(mouseEvent.getY() - (-1.0 * dx - -1.0 * dy));
-                            rectangleX.set(initialX);
-                            rectangleInitialX.set(mouseEvent.getX());
-                        } else {
-                            initialRectangle.setX(mouseEvent.getX() + (-1.0 * dx - -1.0 * dy));
-                            rectangleX.set(initialY);
-                            rectangleInitialX.set(mouseEvent.getY());
-                        }
-                    } else if (dy < 0) {  // 1st quad case
+                        rectangleInitialX.set(mouseEvent.getX());
+                        rectangleInitialY.set(mouseEvent.getY());
+                        rectangleX.set(initialX);
+                        rectangleY.set(initialY);
+                    }
+                    else if (dy < 0) {  // 1st quadrant case
                         initialRectangle.setX(initialX);
                         initialRectangle.setY(mouseEvent.getY());
-                        rectangleX.set(initialY);
-                        rectangleInitialX.set(mouseEvent.getY());
-                    } else if (dx < 0) {  // 3rd quad case
+                        rectangleInitialX.set(initialX);
+                        rectangleInitialY.set(mouseEvent.getY());
+                        rectangleX.set(mouseEvent.getX());
+                        rectangleY.set(initialY);
+                    }
+                    else if (dx < 0) {  // 3rd quad case
                         initialRectangle.setX(mouseEvent.getX());
                         initialRectangle.setY(initialY);
-                        rectangleX.set(initialX);
                         rectangleInitialX.set(mouseEvent.getX());
+                        rectangleInitialY.set(initialY);
+                        rectangleX.set(initialX);
+                        rectangleY.set(mouseEvent.getY());
                     } else {  // 4th quad case
                         initialRectangle.setX(initialX);
                         initialRectangle.setY(initialY);
-                        rectangleX.set(mouseEvent.getX());
                         rectangleInitialX.set(initialX);
+                        rectangleInitialY.set(initialY);
+                        rectangleX.set(mouseEvent.getX());
+                        rectangleY.set(mouseEvent.getY());
                     }
                 } else if (mouseEvent.getEventType() == MouseEvent.MOUSE_RELEASED) {
                     Rectangle finalRectangle = getNewRectangle();
@@ -87,6 +92,7 @@ public class SquareShape extends RectangleShape {
                     finalRectangle.setHeight(initialRectangle.getHeight());
                     pane.getChildren().add(finalRectangle);
                     rectangleX.set(0);
+                    rectangleY.set(0);
                     pane.getChildren().remove(initialRectangle);
                     operationHistory.shapeDrawn(pane);
                 }
@@ -98,68 +104,67 @@ public class SquareShape extends RectangleShape {
     }
 
     private Rectangle getNewRectangle() {
-        Rectangle finalRectangle = new Rectangle();
-        finalRectangle.setFill(Color.TRANSPARENT);
-        return finalRectangle;
+        Rectangle rectangle = new Rectangle();
+        rectangle.setFill(Color.TRANSPARENT);
+        return rectangle;
     }
 
     @Override
     public void resizeShape(Node node, Pane pane) {
         resetMouseEvents(pane);
-        finalRectangle = (Rectangle) node;
-        initialX = finalRectangle.getX();
-        initialY = finalRectangle.getY();
-        initialW = finalRectangle.getWidth();
-        initialH = finalRectangle.getHeight();
+        rectangle = (Rectangle) node;
+        initialX = rectangle.getX();
+        initialY = rectangle.getY();
+        initialW = rectangle.getWidth();
+        initialH = rectangle.getHeight();
         EventHandler<MouseEvent> mouseHandler = mouseEvent -> {
             if (mouseEvent.getEventType() == MouseEvent.MOUSE_MOVED) {
                 setCursor(node, mouseEvent.getX(), mouseEvent.getY());
             }
             if (mouseEvent.getEventType() == MouseEvent.MOUSE_PRESSED) {
                 setShapeStyleOnDrag(node);
-                initialX = finalRectangle.getX();
-                initialY = finalRectangle.getY();
-                initialW = finalRectangle.getWidth();
-                initialH = finalRectangle.getHeight();
+                initialX = rectangle.getX();
+                initialY = rectangle.getY();
+                initialW = rectangle.getWidth();
+                initialH = rectangle.getHeight();
                 stateX = mouseEvent.getX();
                 stateY = mouseEvent.getY();
             }
             if (mouseEvent.getEventType() == MouseEvent.MOUSE_DRAGGED) {
                 // Right
                 if (stateX > initialX - 10 && stateX < initialX + 10) {
-                if (initialW + initialX - mouseEvent.getX() > 5) {
-                    finalRectangle.setX(mouseEvent.getX());
-                    finalRectangle.setY(initialY);
-                    finalRectangle.setWidth(initialW + initialX - mouseEvent.getX());
-                    finalRectangle.setHeight(initialW + initialX - mouseEvent.getX());
-                }
+                    if (initialW + initialX - mouseEvent.getX() > 5) {
+                        rectangle.setX(mouseEvent.getX());
+                        rectangle.setY(initialY);
+                        rectangle.setWidth(initialW + initialX - mouseEvent.getX());
+                        rectangle.setHeight(initialH);
+                    }
                 }
                 // Left
                 if (stateX > (initialX + initialW - 10) && stateX < (initialX + initialW + 10)) {
                     if (initialW + mouseEvent.getX() - (initialX + initialW) > 5) {
-                        finalRectangle.setX(initialX);
-                        finalRectangle.setY(initialY);
-                        finalRectangle.setWidth(initialW + mouseEvent.getX() - (initialX + initialW));
-                        finalRectangle.setHeight(initialW + mouseEvent.getX() - (initialX + initialW));
+                        rectangle.setX(initialX);
+                        rectangle.setY(initialY);
+                        rectangle.setWidth(initialW + mouseEvent.getX() - (initialX + initialW));
+                        rectangle.setHeight(initialH);
                     }
                 }
                 // Up
                 if (stateY > initialY - 10 && stateY < initialY + 10) {
                     if (initialH + initialY - mouseEvent.getY() > 5) {
-                        finalRectangle.setX(initialX);
-                        finalRectangle.setY(mouseEvent.getY());
-                        finalRectangle.setHeight(initialH + initialY - mouseEvent.getY());
-                        finalRectangle.setWidth(initialH + initialY - mouseEvent.getY());
+                        rectangle.setX(initialX);
+                        rectangle.setY(mouseEvent.getY());
+                        rectangle.setWidth(initialW);
+                        rectangle.setHeight(initialH + initialY - mouseEvent.getY());
                     }
                 }
                 // Down
                 if (stateY > (initialY + initialH - 10) && stateY < (initialY + initialH + 10)) {
                     if (initialH + mouseEvent.getY() - (initialY + initialH) > 5) {
-                        finalRectangle.setX(initialX);
-                        finalRectangle.setY(initialY);
-                        finalRectangle.setHeight(initialH + mouseEvent.getY() - (initialY + initialH));
-                        finalRectangle.setWidth(initialH + mouseEvent.getY() - (initialY + initialH));
-
+                        rectangle.setX(initialX);
+                        rectangle.setY(initialY);
+                        rectangle.setWidth(initialW);
+                        rectangle.setHeight(initialH + mouseEvent.getY() - (initialY + initialH));
                     }
                 }
             }
@@ -175,6 +180,11 @@ public class SquareShape extends RectangleShape {
 
     @Override
     public void setCursor(Node node, double stateX, double stateY) {
-        super.setCursor(node, stateX, stateY);
+        Rectangle rectangle = (Rectangle) node;
+        double initialX = rectangle.getX();
+        double initialY = rectangle.getY();
+        double initialW = rectangle.getWidth();
+        double initialH = rectangle.getHeight();
+        configureCursor(initialX,initialY,initialW,initialH,stateX,stateY,node);
     }
 }

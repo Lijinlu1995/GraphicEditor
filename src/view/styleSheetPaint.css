@@ -31,6 +31,11 @@
   -fx-background-repeat: stretch;
 }
 
+#eyedropperTool {
+  -fx-background-image: url('file:icons/eye-dropper.png');
+  -fx-background-position: center;
+  -fx-background-repeat: stretch;
+}
 #cutTool {
   -fx-background-image: url('file:icons/scissors.png');
   -fx-background-position: center;

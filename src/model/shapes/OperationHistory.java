@@ -1,4 +1,4 @@
-package model;
+package model.shapes;
 
 import java.util.HashSet;
 import java.util.LinkedList;

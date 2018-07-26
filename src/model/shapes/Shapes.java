@@ -1,4 +1,4 @@
-package model;
+package model.shapes;
 
 import javafx.event.EventHandler;
 import javafx.scene.Cursor;

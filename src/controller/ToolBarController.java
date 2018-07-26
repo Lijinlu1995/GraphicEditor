@@ -11,9 +11,9 @@ import javafx.scene.shape.Ellipse;
 import javafx.scene.shape.Line;
 import javafx.scene.shape.Polygon;
 import javafx.scene.shape.Rectangle;
-import model.*;
+import model.shapes.*;
 
-import static model.enums.State.*;
+import static model.shapes.enums.State.*;
 
 /* This class represents the tool bar controller which is responsible for handling
    the operations that can be done from the tool bar as geometric shapes drawing, moving, resizing, deleting and so on.

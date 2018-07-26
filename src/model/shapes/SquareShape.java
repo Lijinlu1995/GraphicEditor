@@ -1,4 +1,4 @@
-package model;
+package model.shapes;
 
 import javafx.beans.property.SimpleDoubleProperty;
 import javafx.event.EventHandler;
@@ -10,10 +10,10 @@ import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 
-/* This class represents the rectangle shape class.*/
-public class RoundRectangleShape extends PolygonShape {
+/* This class represents the square shape class.*/
+public class SquareShape extends RectangleShape {
 
-    private Rectangle rectangle;
+    private Rectangle finalRectangle;
     private double initialX;
     private double initialY;
     private double initialW;
@@ -21,32 +21,27 @@ public class RoundRectangleShape extends PolygonShape {
     private double stateX;
     private double stateY;
 
-    public RoundRectangleShape(OperationHistory operationHistory) {
+    public SquareShape(OperationHistory operationHistory) {
         super(operationHistory);
     }
 
     @Override
     public void drawShape(Pane pane, ColorPicker colorPicker, Slider lineWidth) {
         SimpleDoubleProperty rectangleInitialX = new SimpleDoubleProperty();
-        SimpleDoubleProperty rectangleInitialY = new SimpleDoubleProperty();
         SimpleDoubleProperty rectangleX = new SimpleDoubleProperty();
-        SimpleDoubleProperty rectangleY = new SimpleDoubleProperty();
         Rectangle initialRectangle = getNewRectangle();
-
         EventHandler<MouseEvent> mouseHandler = new EventHandler<MouseEvent>() {
             double initialX, x, dx, initialY, y, dy;
             @Override
             public void handle(MouseEvent mouseEvent) {
                 if (mouseEvent.getEventType() == MouseEvent.MOUSE_PRESSED) {
                     initialRectangle.widthProperty().bind(rectangleX.subtract(rectangleInitialX));
-                    initialRectangle.heightProperty().bind(rectangleY.subtract(rectangleInitialY));
+                    initialRectangle.heightProperty().bind(rectangleX.subtract(rectangleInitialX));
                     pane.getChildren().add(initialRectangle);
                     initialRectangle.setStroke(colorPicker.getValue());
                     initialRectangle.setStrokeWidth(lineWidth.getValue());
                     initialRectangle.setX(mouseEvent.getX());
                     initialRectangle.setY(mouseEvent.getY());
-                    initialRectangle.setArcHeight(20.0);
-                    initialRectangle.setArcWidth(30.0);
                     initialX = mouseEvent.getX();
                     initialY = mouseEvent.getY();
                 } else if (mouseEvent.getEventType() == MouseEvent.MOUSE_DRAGGED) {
@@ -54,44 +49,33 @@ public class RoundRectangleShape extends PolygonShape {
                     dx = x - initialX;
                     y = mouseEvent.getY();
                     dy = y - initialY;
-                    if (dx < 0 && dy < 0) {  // 2nd quadrant case
+                    if (dx < 0 && dy < 0) {  // 2nd quad case
                         initialRectangle.setX(mouseEvent.getX());
                         initialRectangle.setY(mouseEvent.getY());
-                        rectangleInitialX.set(mouseEvent.getX());
-                        rectangleInitialY.set(mouseEvent.getY());
-                        initialRectangle.setArcHeight(20.0);
-                        initialRectangle.setArcWidth(30.0);
-                        rectangleX.set(initialX);
-                        rectangleY.set(initialY);
-                    }
-                    else if (dy < 0) {  // 1st quadrant case
+                        if (-1.0 * dx > -1.0 * dy) {
+                            initialRectangle.setY(mouseEvent.getY() - (-1.0 * dx - -1.0 * dy));
+                            rectangleX.set(initialX);
+                            rectangleInitialX.set(mouseEvent.getX());
+                        } else {
+                            initialRectangle.setX(mouseEvent.getX() + (-1.0 * dx - -1.0 * dy));
+                            rectangleX.set(initialY);
+                            rectangleInitialX.set(mouseEvent.getY());
+                        }
+                    } else if (dy < 0) {  // 1st quad case
                         initialRectangle.setX(initialX);
                         initialRectangle.setY(mouseEvent.getY());
-                        initialRectangle.setArcHeight(20.0);
-                        initialRectangle.setArcWidth(30.0);
-                        rectangleInitialX.set(initialX);
-                        rectangleInitialY.set(mouseEvent.getY());
-                        rectangleX.set(mouseEvent.getX());
-                        rectangleY.set(initialY);
-                    }
-                    else if (dx < 0) {  // 3rd quad case
+                        rectangleX.set(initialY);
+                        rectangleInitialX.set(mouseEvent.getY());
+                    } else if (dx < 0) {  // 3rd quad case
                         initialRectangle.setX(mouseEvent.getX());
                         initialRectangle.setY(initialY);
-                        initialRectangle.setArcHeight(20.0);
-                        initialRectangle.setArcWidth(30.0);
-                        rectangleInitialX.set(mouseEvent.getX());
-                        rectangleInitialY.set(initialY);
                         rectangleX.set(initialX);
-                        rectangleY.set(mouseEvent.getY());
+                        rectangleInitialX.set(mouseEvent.getX());
                     } else {  // 4th quad case
                         initialRectangle.setX(initialX);
                         initialRectangle.setY(initialY);
-                        initialRectangle.setArcHeight(20.0);
-                        initialRectangle.setArcWidth(30.0);
-                        rectangleInitialX.set(initialX);
-                        rectangleInitialY.set(initialY);
                         rectangleX.set(mouseEvent.getX());
-                        rectangleY.set(mouseEvent.getY());
+                        rectangleInitialX.set(initialX);
                     }
                 } else if (mouseEvent.getEventType() == MouseEvent.MOUSE_RELEASED) {
                     Rectangle finalRectangle = getNewRectangle();
@@ -101,11 +85,8 @@ public class RoundRectangleShape extends PolygonShape {
                     finalRectangle.setY(initialRectangle.getY());
                     finalRectangle.setWidth(initialRectangle.getWidth());
                     finalRectangle.setHeight(initialRectangle.getHeight());
-                    finalRectangle.setArcWidth(initialRectangle.getArcWidth());
-                    finalRectangle.setArcHeight(initialRectangle.getArcHeight());
                     pane.getChildren().add(finalRectangle);
                     rectangleX.set(0);
-                    rectangleY.set(0);
                     pane.getChildren().remove(initialRectangle);
                     operationHistory.shapeDrawn(pane);
                 }
@@ -117,74 +98,75 @@ public class RoundRectangleShape extends PolygonShape {
     }
 
     private Rectangle getNewRectangle() {
-        Rectangle rectangle = new Rectangle();
-        rectangle.setFill(Color.TRANSPARENT);
-        return rectangle;
+        Rectangle finalRectangle = new Rectangle();
+        finalRectangle.setFill(Color.TRANSPARENT);
+        return finalRectangle;
     }
 
     @Override
     public void resizeShape(Node node, Pane pane) {
         resetMouseEvents(pane);
-        rectangle = (Rectangle) node;
-        initialX = rectangle.getX();
-        initialY = rectangle.getY();
-        initialW = rectangle.getWidth();
-        initialH = rectangle.getHeight();
+        finalRectangle = (Rectangle) node;
+        initialX = finalRectangle.getX();
+        initialY = finalRectangle.getY();
+        initialW = finalRectangle.getWidth();
+        initialH = finalRectangle.getHeight();
         EventHandler<MouseEvent> mouseHandler = mouseEvent -> {
             if (mouseEvent.getEventType() == MouseEvent.MOUSE_MOVED) {
                 setCursor(node, mouseEvent.getX(), mouseEvent.getY());
             }
             if (mouseEvent.getEventType() == MouseEvent.MOUSE_PRESSED) {
                 setShapeStyleOnDrag(node);
-                initialX = rectangle.getX();
-                initialY = rectangle.getY();
-                initialW = rectangle.getWidth();
-                initialH = rectangle.getHeight();
+                initialX = finalRectangle.getX();
+                initialY = finalRectangle.getY();
+                initialW = finalRectangle.getWidth();
+                initialH = finalRectangle.getHeight();
                 stateX = mouseEvent.getX();
                 stateY = mouseEvent.getY();
             }
             if (mouseEvent.getEventType() == MouseEvent.MOUSE_DRAGGED) {
                 // Right
                 if (stateX > initialX - 10 && stateX < initialX + 10) {
-                    if (initialW + initialX - mouseEvent.getX() > 5) {
-                        rectangle.setX(mouseEvent.getX());
-                        rectangle.setY(initialY);
-                        rectangle.setWidth(initialW + initialX - mouseEvent.getX());
-                        rectangle.setHeight(initialH);
-                    }
+                if (initialW + initialX - mouseEvent.getX() > 5) {
+                    finalRectangle.setX(mouseEvent.getX());
+                    finalRectangle.setY(initialY);
+                    finalRectangle.setWidth(initialW + initialX - mouseEvent.getX());
+                    finalRectangle.setHeight(initialW + initialX - mouseEvent.getX());
+                }
                 }
                 // Left
                 if (stateX > (initialX + initialW - 10) && stateX < (initialX + initialW + 10)) {
                     if (initialW + mouseEvent.getX() - (initialX + initialW) > 5) {
-                        rectangle.setX(initialX);
-                        rectangle.setY(initialY);
-                        rectangle.setWidth(initialW + mouseEvent.getX() - (initialX + initialW));
-                        rectangle.setHeight(initialH);
+                        finalRectangle.setX(initialX);
+                        finalRectangle.setY(initialY);
+                        finalRectangle.setWidth(initialW + mouseEvent.getX() - (initialX + initialW));
+                        finalRectangle.setHeight(initialW + mouseEvent.getX() - (initialX + initialW));
                     }
                 }
                 // Up
                 if (stateY > initialY - 10 && stateY < initialY + 10) {
                     if (initialH + initialY - mouseEvent.getY() > 5) {
-                        rectangle.setX(initialX);
-                        rectangle.setY(mouseEvent.getY());
-                        rectangle.setWidth(initialW);
-                        rectangle.setHeight(initialH + initialY - mouseEvent.getY());
+                        finalRectangle.setX(initialX);
+                        finalRectangle.setY(mouseEvent.getY());
+                        finalRectangle.setHeight(initialH + initialY - mouseEvent.getY());
+                        finalRectangle.setWidth(initialH + initialY - mouseEvent.getY());
                     }
                 }
                 // Down
                 if (stateY > (initialY + initialH - 10) && stateY < (initialY + initialH + 10)) {
                     if (initialH + mouseEvent.getY() - (initialY + initialH) > 5) {
-                        rectangle.setX(initialX);
-                        rectangle.setY(initialY);
-                        rectangle.setWidth(initialW);
-                        rectangle.setHeight(initialH + mouseEvent.getY() - (initialY + initialH));
+                        finalRectangle.setX(initialX);
+                        finalRectangle.setY(initialY);
+                        finalRectangle.setHeight(initialH + mouseEvent.getY() - (initialY + initialH));
+                        finalRectangle.setWidth(initialH + mouseEvent.getY() - (initialY + initialH));
+
                     }
                 }
             }
             if (mouseEvent.getEventType() == MouseEvent.MOUSE_RELEASED) {
                 setShapeStyleOnRelease(node);
                 operationHistory.shapeDrawn(pane);
-            }};
+        }};
         node.setOnMousePressed(mouseHandler);
         node.setOnMouseDragged(mouseHandler);
         node.setOnMouseReleased(mouseHandler);
@@ -193,11 +175,6 @@ public class RoundRectangleShape extends PolygonShape {
 
     @Override
     public void setCursor(Node node, double stateX, double stateY) {
-        Rectangle rectangle = (Rectangle) node;
-        double initialX = rectangle.getX();
-        double initialY = rectangle.getY();
-        double initialW = rectangle.getWidth();
-        double initialH = rectangle.getHeight();
-        configureCursor(initialX,initialY,initialW,initialH,stateX,stateY,node);
+        super.setCursor(node, stateX, stateY);
     }
 }

@@ -20,7 +20,7 @@ import javafx.scene.shape.Line;
 import javafx.scene.shape.Polygon;
 import javafx.scene.shape.Rectangle;
 import javafx.stage.FileChooser;
-import model.PaneData;
+import model.shapes.PaneData;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;

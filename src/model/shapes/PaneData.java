@@ -1,4 +1,4 @@
-package model;
+package model.shapes;
 
 import javafx.scene.canvas.Canvas;
 import javafx.scene.layout.Pane;
